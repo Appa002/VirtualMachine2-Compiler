@@ -12,7 +12,7 @@
 #include "../header/error.h"
 
 
-void compiler::pre_processing::check_existence_of_all_files$(compiler::data::InputFile file) {
+void compiler::pre_processing::checkExistenceOfAllFiles$(compiler::data::InputFile file) {
     std::vector<compiler::data::InputFile> stack;
     stack.push_back(file);
     check_existence_of_all_files$(file, stack);

@@ -17,7 +17,7 @@ namespace compiler::pre_processing {
     const utils::pipe_closure<details::makeSymbolsUnique_f> makeSymbolsUnique = {};
     const utils::pipe_closure<details::transformInputFiles_f> transformInputFiles = {};
 
-    void check_existence_of_all_files$(compiler::data::InputFile file);
+    void checkExistenceOfAllFiles$(compiler::data::InputFile file);
 
     void check_existence_of_all_files$(compiler::data::InputFile file,
                                        std::vector<compiler::data::InputFile> includeStack);

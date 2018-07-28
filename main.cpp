@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     }
 
     compiler::data::InputFile file(compiler::io::open$(argv[1]), argv[1], 0);
-    compiler::pre_processing::check_existence_of_all_files$(file);
+    compiler::pre_processing::checkExistenceOfAllFiles$(file);
 
     auto out = file
             | pre_processing::fetchIncludeFiles
