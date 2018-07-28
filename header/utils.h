@@ -10,23 +10,10 @@
 #include <sstream>
 
 namespace compiler::utils{
-    std::vector<std::string> splitStr(std::string in, char c){
-        std::vector<std::string> out;
-        std::string line;
-        std::istringstream str(in);
-        while(std::getline(str, line, c)){
-            out.push_back(line);
-        }
-        return out;
-    }
 
-    std::string mergeStr(std::vector<std::string> strs, int n = 0){
-        std::string out;
-        for(int i = n; i < strs.size(); i++){
-            out += strs.at(static_cast<unsigned long>(i));
-        }
-        return out;
-    }
+    std::vector<std::string> splitStr(std::string in, char c);
+    std::string mergeStr(std::vector<std::string> strs, int n = 0);
+
 }
 
 #endif //VM2_0_COMPILER_UTILS_H
