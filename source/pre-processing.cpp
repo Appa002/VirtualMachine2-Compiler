@@ -37,7 +37,7 @@ void compiler::pre_processing::check_existence_of_all_files$(compiler::classes::
                 throw error::file_error("File \"" + it + "\", requested from"+ includeStackString + " could not be opened!");
             }
 
-            classes::InputFile requestedFile(io::open$(it), it);
+            classes::InputFile requestedFile(io::open$(it), it, 0);
             includeStack.push_back(requestedFile);
             check_existence_of_all_files$(requestedFile, includeStack);
         }
@@ -57,7 +57,7 @@ compiler::pre_processing::fetchIncludeFiles(compiler::classes::InputFile file,
     for(std::string it : file.lines()){
         if(it.at(0) == '#') {
             it.erase(it.begin());
-            classes::InputFile f(io::open$(it), it);
+            classes::InputFile f(io::open$(it), it, files.size());
             files.push_back(f);
             fetchIncludeFiles(f, files);
         }
@@ -72,11 +72,6 @@ compiler::pre_processing::merge_include_files(std::vector<compiler::classes::Fil
         for(auto line : file.lines){
             master.lines.push_back(line);
         }
-
-        for(auto& entry : file.symbol_table){
-            master.symbol_table.push_back(
-                    std::pair<std::string, uint32_t>( entry.first, entry.second ));
-        }
     }
     return master;
 }
@@ -84,8 +79,9 @@ compiler::pre_processing::merge_include_files(std::vector<compiler::classes::Fil
 std::vector<compiler::classes::File>
 compiler::pre_processing::makeSymbolsUnique(std::vector<compiler::classes::File> files) {
     for(uint32_t i = 0; i < files.size(); i++){
-        for(auto& entry : files.at(i).symbol_table){
-            entry.first = std::to_string(i) + entry.first;
+        for(auto& line : files.at(i).lines){
+            if(line.hasSymbol)
+                line.symbol = std::to_string(i) + line.symbol;
         }
     }
     return files;

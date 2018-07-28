@@ -12,12 +12,12 @@ int main(int argc, char* argv[]) {
     }
 
     std::string file = compiler::io::open(argv[1]);
-    compiler::classes::InputFile f(file, argv[1]);
+    compiler::classes::InputFile f(file, argv[1], 0);
     compiler::pre_processing::check_existence_of_all_files$(f);
     auto files = compiler::pre_processing::fetchIncludeFiles(f);
     auto itemFile = compiler::pre_processing::transformInputFiles(files);
     itemFile = compiler::pre_processing::makeSymbolsUnique(itemFile);
-    compiler::pre_processing::merge_include_files(itemFile);
+    auto preprocessedFile = compiler::pre_processing::merge_include_files(itemFile);
     return 0;
 }
 

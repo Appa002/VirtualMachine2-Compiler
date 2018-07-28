@@ -4,9 +4,10 @@
 
 #include "../header/InputFile.h"
 
-compiler::classes::InputFile::InputFile(std::string file, std::string path) {
+compiler::classes::InputFile::InputFile(std::string file, std::string path, size_t fileLoadNum) {
     this->data_ = file;
     this->path_ = path;
+    this->fileLoadingNum_ = fileLoadNum;
 
     std::string temp;
     size_t i = 0;
@@ -50,4 +51,13 @@ const std::vector<std::string> &compiler::classes::InputFile::lines(std::vector<
 const std::string &compiler::classes::InputFile::path(std::string val) {
     this->path_ = val;
     return this->path_;
+}
+
+const size_t &compiler::classes::InputFile::fileLoadingNum() {
+    return this->fileLoadingNum_;
+}
+
+const size_t &compiler::classes::InputFile::fileLoadingNum(size_t val) {
+    this->fileLoadingNum_  = val;
+    return this->fileLoadingNum_;
 }

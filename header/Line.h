@@ -7,19 +7,18 @@
 
 #include <string>
 #include <vector>
-#include "InputFile.h"
 
 namespace compiler::classes {
     class Line {
     public:
         Line() = default;
-        Line(std::string str);
+        explicit Line(std::string str, bool hasSym, size_t fileNum);
     private:
     public:
         std::string name;
         std::vector<std::string> args;
-        bool thisLineHasSymbol = false;
-        std::string sym;
+        bool hasSymbol = false;
+        std::string symbol;
     };
 }
 

@@ -15,12 +15,11 @@ namespace compiler::classes{
     class File{
     public:
         File() = default;
-        File(classes::InputFile file);
+        explicit File(classes::InputFile file);
 
     private:
     public:
         std::vector<classes::Line> lines;
-        std::vector<std::pair<std::string, uint32_t>> symbol_table;
     };
 }
 
