@@ -18,7 +18,7 @@ namespace compiler::pre_processing::details{
                       std::vector<compiler::data::InputFile> files);
 
     compiler::data::File
-    merge_include_files(std::vector<compiler::data::File> files);
+    mergeIncludeFiles(std::vector<compiler::data::File> files);
 
     std::vector<compiler::data::File>
     makeSymbolsUnique(std::vector<compiler::data::File> files);
@@ -34,10 +34,10 @@ namespace compiler::pre_processing::details{
         }
     };
 
-    struct merge_include_files_f {
+    struct mergeIncludeFiles_f {
         template<class T>
         auto operator()(T x) const {
-            return merge_include_files(x);
+            return mergeIncludeFiles(x);
         }
     };
 

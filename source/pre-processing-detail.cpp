@@ -36,7 +36,7 @@ compiler::pre_processing::details::fetchIncludeFiles(compiler::data::InputFile f
 }
 
 compiler::data::File
-compiler::pre_processing::details::merge_include_files(std::vector<compiler::data::File> files) {
+compiler::pre_processing::details::mergeIncludeFiles(std::vector<compiler::data::File> files) {
     data::File master;
     for(auto file : files){
         for(auto line : file.lines){

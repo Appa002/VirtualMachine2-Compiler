@@ -13,7 +13,7 @@
 
 namespace compiler::pre_processing {
     const utils::pipe_closure<details::fetchIncludeFiles_f> fetchIncludeFiles = {};
-    const utils::pipe_closure<details::merge_include_files_f> merge_include_files = {};
+    const utils::pipe_closure<details::mergeIncludeFiles_f> mergeIncludeFiles = {};
     const utils::pipe_closure<details::makeSymbolsUnique_f> makeSymbolsUnique = {};
     const utils::pipe_closure<details::transformInputFiles_f> transformInputFiles = {};
 

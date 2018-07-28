@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
             | pre_processing::fetchIncludeFiles
             | pre_processing::transformInputFiles
             | pre_processing::makeSymbolsUnique
-            | pre_processing::merge_include_files;
+            | pre_processing::mergeIncludeFiles;
 
     return 0;
 }
