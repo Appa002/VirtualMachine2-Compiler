@@ -45,14 +45,14 @@ void compiler::pre_processing::check_existence_of_all_files$(compiler::data::Inp
 }
 
 std::vector<compiler::data::InputFile>
-compiler::pre_processing::fetchIncludeFiles(compiler::data::InputFile file) {
+compiler::pre_processing::details::fetchIncludeFiles(compiler::data::InputFile file) {
     std::vector<compiler::data::InputFile> vec;
     vec.push_back(file);
     return fetchIncludeFiles(file, vec);
 }
 
 std::vector<compiler::data::InputFile>
-compiler::pre_processing::fetchIncludeFiles(compiler::data::InputFile file,
+compiler::pre_processing::details::fetchIncludeFiles(compiler::data::InputFile file,
                                             std::vector<compiler::data::InputFile> files) {
     for(std::string it : file.lines()){
         if(it.at(0) == '#') {
@@ -66,7 +66,7 @@ compiler::pre_processing::fetchIncludeFiles(compiler::data::InputFile file,
 }
 
 compiler::data::File
-compiler::pre_processing::merge_include_files(std::vector<compiler::data::File> files) {
+compiler::pre_processing::details::merge_include_files(std::vector<compiler::data::File> files) {
     data::File master;
     for(auto file : files){
         for(auto line : file.lines){
@@ -77,7 +77,7 @@ compiler::pre_processing::merge_include_files(std::vector<compiler::data::File> 
 }
 
 std::vector<compiler::data::File>
-compiler::pre_processing::makeSymbolsUnique(std::vector<compiler::data::File> files) {
+compiler::pre_processing::details::makeSymbolsUnique(std::vector<compiler::data::File> files) {
     for(uint32_t i = 0; i < files.size(); i++){
         for(auto& line : files.at(i).lines){
             if(line.hasSymbol)
@@ -88,7 +88,7 @@ compiler::pre_processing::makeSymbolsUnique(std::vector<compiler::data::File> fi
 }
 
 std::vector<compiler::data::File>
-compiler::pre_processing::transformInputFiles(std::vector<compiler::data::InputFile> files) {
+compiler::pre_processing::details::transformInputFiles(std::vector<compiler::data::InputFile> files) {
     std::vector<compiler::data::File> out;
     for(auto it : files){
         out.push_back(data::File(it));
