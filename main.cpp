@@ -3,6 +3,8 @@
 #include "header/InputFile.h"
 #include "header/pre-processing.h"
 
+using namespace compiler;
+
 void usage();
 
 int main(int argc, char* argv[]) {
@@ -11,14 +13,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string file = compiler::io::open(argv[1]);
-    compiler::data::InputFile f(file, argv[1], 0);
-    compiler::pre_processing::check_existence_of_all_files$(f);
+    compiler::data::InputFile file(compiler::io::open$(argv[1]), argv[1], 0);
+    compiler::pre_processing::check_existence_of_all_files$(file);
 
-    auto files = compiler::pre_processing::fetchIncludeFiles(f);
-    auto itemFile = compiler::pre_processing::transformInputFiles(files);
-    itemFile = compiler::pre_processing::makeSymbolsUnique(itemFile);
-    auto preprocessedFile = compiler::pre_processing::merge_include_files(itemFile);
+    auto out = file
+            | pre_processing::fetchIncludeFiles
+            | pre_processing::transformInputFiles
+            | pre_processing::makeSymbolsUnique
+            | pre_processing::merge_include_files;
+
     return 0;
 }
 
