@@ -6,7 +6,7 @@
 #include "../header/InputFile.h"
 #include "../header/utils.h"
 
-compiler::classes::Line::Line(std::string str, bool hasSym, size_t fileNum) {
+compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
     auto splitStr = utils::splitStr(str, ' ');
     this->hasSymbol = hasSym;
     if(hasSym){

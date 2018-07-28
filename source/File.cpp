@@ -7,14 +7,14 @@
 #include "../header/File.h"
 #include "../header/utils.h"
 
-compiler::classes::File::File(compiler::classes::InputFile file) {
+compiler::data::File::File(compiler::data::InputFile file) {
     for(auto it : file.lines()){
         switch (it.at(0)){
             case ('#'):{
                 break;
             }
             case('\''): {
-                classes::Line line(it, true, file.fileLoadingNum());
+                data::Line line(it, true, file.fileLoadingNum());
                 lines.push_back(line);
                 break;
             }

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace compiler::classes {
+namespace compiler::data {
     class InputFile {
     public:
         InputFile() = delete;

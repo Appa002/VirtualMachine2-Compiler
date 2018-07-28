@@ -10,27 +10,27 @@
 #include "File.h"
 
 namespace compiler::pre_processing{
-    void check_existence_of_all_files$(compiler::classes::InputFile file);
-    void check_existence_of_all_files$(compiler::classes::InputFile file,
-                                           std::vector<compiler::classes::InputFile> includeStack);
+    void check_existence_of_all_files$(compiler::data::InputFile file);
+    void check_existence_of_all_files$(compiler::data::InputFile file,
+                                           std::vector<compiler::data::InputFile> includeStack);
 
 
-    std::vector<compiler::classes::InputFile>
-            fetchIncludeFiles(compiler::classes::InputFile file);
+    std::vector<compiler::data::InputFile>
+            fetchIncludeFiles(compiler::data::InputFile file);
 
-    std::vector<compiler::classes::InputFile>
-            fetchIncludeFiles(compiler::classes::InputFile file,
-                              std::vector<compiler::classes::InputFile> files);
+    std::vector<compiler::data::InputFile>
+            fetchIncludeFiles(compiler::data::InputFile file,
+                              std::vector<compiler::data::InputFile> files);
 
-    compiler::classes::File
-            merge_include_files(std::vector<compiler::classes::File> files);
+    compiler::data::File
+            merge_include_files(std::vector<compiler::data::File> files);
 
-    std::vector<compiler::classes::File>
-            makeSymbolsUnique(std::vector<compiler::classes::File> files);
+    std::vector<compiler::data::File>
+            makeSymbolsUnique(std::vector<compiler::data::File> files);
 
 
-    std::vector<compiler::classes::File>
-            transformInputFiles(std::vector<compiler::classes::InputFile> files);
+    std::vector<compiler::data::File>
+            transformInputFiles(std::vector<compiler::data::InputFile> files);
 }
 
 #endif //VM2_0_COMPILER_PRE_PROCESSING_H

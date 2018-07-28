@@ -4,7 +4,7 @@
 
 #include "../header/InputFile.h"
 
-compiler::classes::InputFile::InputFile(std::string file, std::string path, size_t fileLoadNum) {
+compiler::data::InputFile::InputFile(std::string file, std::string path, size_t fileLoadNum) {
     this->data_ = file;
     this->path_ = path;
     this->fileLoadingNum_ = fileLoadNum;
@@ -26,38 +26,38 @@ compiler::classes::InputFile::InputFile(std::string file, std::string path, size
     }
 }
 
-const std::string &compiler::classes::InputFile::data() {
+const std::string &compiler::data::InputFile::data() {
     return this->data_;
 }
 
-const std::vector<std::string> &compiler::classes::InputFile::lines() {
+const std::vector<std::string> &compiler::data::InputFile::lines() {
     return this->lines_;
 }
 
-const std::string &compiler::classes::InputFile::path() {
+const std::string &compiler::data::InputFile::path() {
     return this->path_;
 }
 
-const std::string &compiler::classes::InputFile::data(std::string val) {
+const std::string &compiler::data::InputFile::data(std::string val) {
     this->data_ = val;
     return this->data_;
 }
 
-const std::vector<std::string> &compiler::classes::InputFile::lines(std::vector<std::string> val){
+const std::vector<std::string> &compiler::data::InputFile::lines(std::vector<std::string> val){
     this->lines_ = val;
     return this->lines_;
 }
 
-const std::string &compiler::classes::InputFile::path(std::string val) {
+const std::string &compiler::data::InputFile::path(std::string val) {
     this->path_ = val;
     return this->path_;
 }
 
-const size_t &compiler::classes::InputFile::fileLoadingNum() {
+const size_t &compiler::data::InputFile::fileLoadingNum() {
     return this->fileLoadingNum_;
 }
 
-const size_t &compiler::classes::InputFile::fileLoadingNum(size_t val) {
+const size_t &compiler::data::InputFile::fileLoadingNum(size_t val) {
     this->fileLoadingNum_  = val;
     return this->fileLoadingNum_;
 }

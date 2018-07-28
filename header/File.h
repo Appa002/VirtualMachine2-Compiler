@@ -11,15 +11,15 @@
 
 #include "Line.h"
 
-namespace compiler::classes{
+namespace compiler::data{
     class File{
     public:
         File() = default;
-        explicit File(classes::InputFile file);
+        explicit File(data::InputFile file);
 
     private:
     public:
-        std::vector<classes::Line> lines;
+        std::vector<data::Line> lines;
     };
 }
 
