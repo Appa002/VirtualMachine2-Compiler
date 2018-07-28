@@ -11,11 +11,11 @@
 namespace compiler::classes {
     class Line {
     public:
-        Line() = default;
+        Line() = delete;
         explicit Line(std::string str, bool hasSym, size_t fileNum);
     private:
     public:
-        std::string name;
+        std::string instructionName;
         std::vector<std::string> args;
         bool hasSymbol = false;
         std::string symbol;

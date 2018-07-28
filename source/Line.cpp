@@ -15,7 +15,7 @@ compiler::classes::Line::Line(std::string str, bool hasSym, size_t fileNum) {
         splitStr.erase(splitStr.begin());
     }
 
-    this->name = splitStr[0];
+    this->instructionName = splitStr[0];
     splitStr.erase(splitStr.begin());
 
     for(auto arg : splitStr){

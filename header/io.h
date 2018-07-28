@@ -10,7 +10,6 @@
 namespace compiler::io{
 
     std::string open$(std::string path);
-
     std::string open(std::string path);
 
 }
