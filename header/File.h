@@ -10,6 +10,7 @@
 #include <unordered_map>
 
 #include "Line.h"
+#include "InputFile.h"
 
 namespace compiler::data{
     class File{
