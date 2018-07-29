@@ -2,6 +2,7 @@
 #include "./header/io.h"
 #include "header/InputFile.h"
 #include "header/pre-processing.h"
+#include "header/compiling.h"
 
 using namespace compiler;
 
@@ -13,6 +14,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+
     compiler::data::InputFile file(compiler::io::open$(argv[1]), argv[1], 0);
     compiler::pre_processing::checkExistenceOfAllFiles$(file);
 
@@ -20,7 +22,10 @@ int main(int argc, char* argv[]) {
             | pre_processing::fetchIncludeFiles
             | pre_processing::transformInputFiles
             | pre_processing::makeSymbolsUnique
-            | pre_processing::mergeIncludeFiles;
+            | pre_processing::mergeIncludeFiles
+            | compiling::compile
+            | compiling::resolveSymbols;
+
 
     return 0;
 }
