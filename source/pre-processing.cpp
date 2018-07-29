@@ -21,6 +21,9 @@ void compiler::pre_processing::checkExistenceOfAllFiles$(compiler::data::InputFi
 void compiler::pre_processing::check_existence_of_all_files$(compiler::data::InputFile file,
                                                              std::vector<compiler::data::InputFile> includeStack) {
     for(std::string it : file.lines()){
+        if(it == "")
+            continue;
+
         if(it.at(0) == '#') {
             it.erase(it.begin());
             io::open(it);
