@@ -8,6 +8,11 @@
 
 compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
     auto splitStr = utils::splitStr(str, ' ');
+    for(int64_t i = splitStr.size() - 1; i >= 0; i--){
+        if(splitStr.at(i) == "")
+            splitStr.erase(splitStr.begin() + i);
+    }
+
     this->hasSymbol = hasSym;
     if(hasSym){
         this->symbol = splitStr[0];
