@@ -11,6 +11,8 @@
 namespace compiler::error{
 
     typedef std::runtime_error file_error;
+    typedef std::runtime_error reference_error;
+    typedef std::runtime_error unknown_instruction_error;
 
 }
 
