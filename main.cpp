@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fstream>
+
 #include "./header/io.h"
 #include "header/InputFile.h"
 #include "header/pre-processing.h"
 #include "header/compiling.h"
+#include "header/error.h"
 
 using namespace compiler;
 
@@ -15,10 +18,10 @@ int main(int argc, char* argv[]) {
     }
 
 
-    compiler::data::InputFile file(compiler::io::open$(argv[1]), argv[1], 0);
-    compiler::pre_processing::checkExistenceOfAllFiles$(file);
+    compiler::data::InputFile inputFile(compiler::io::open$(argv[1]), argv[1], 0);
+    compiler::pre_processing::checkExistenceOfAllFiles$(inputFile);
 
-    auto out = file
+    auto out = inputFile
             | pre_processing::fetchIncludeFiles
             | pre_processing::transformInputFiles
             | pre_processing::makeSymbolsUnique
@@ -27,6 +30,14 @@ int main(int argc, char* argv[]) {
             | compiling::resolveSymbols;
 
 
+    std::ofstream outputFile;
+    outputFile.open("./out.vm2", std::ios::binary | std::ios::out);
+    if(!outputFile.is_open())
+        throw error::file_error("Can't open output file!");
+
+
+    outputFile.write((char*)&out.byteCode.at(0), out.byteCode.size());
+    outputFile.close();
     return 0;
 }
 
