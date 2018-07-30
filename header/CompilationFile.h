@@ -17,13 +17,12 @@ namespace compiler::data {
     private:
         //                  Sym name,       value
         std::unordered_map<std::string, uint32_t> symbolTable_;
-
         //                  Sym name,     whereToInsert
         std::unordered_map<std::string, uint32_t> symbolReferences;
-
-        std::vector<uint8_t> byteCode;
-
         void resolveArg(std::string arg);
+        uint32_t readNum(std::string in);
+        uint32_t readHex(std::string in);
+        uint32_t readFloat(std::string in);
     public:
         void resolveSymbolReferences();
     };
