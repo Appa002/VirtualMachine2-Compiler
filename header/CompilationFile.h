@@ -25,6 +25,7 @@ namespace compiler::data {
         uint32_t readFloat(std::string in);
     public:
         void resolveSymbolReferences();
+        std::vector<uint8_t> byteCode;
     };
 }
 
