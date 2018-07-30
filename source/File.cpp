@@ -13,14 +13,13 @@ compiler::data::File::File(compiler::data::InputFile file) {
             case ('#'):{
                 break;
             }
+            case('-'): {
+                break;
+            }
             case('\''): {
                 data::Line line(it, true, file.fileLoadingNum());
                 lines.push_back(line);
                 break;
-            }
-            case('-'):{
-                if(it.at(1) == '-')
-                    break;
             }
             default:{
                 lines.push_back(Line(it, false, file.fileLoadingNum()));
