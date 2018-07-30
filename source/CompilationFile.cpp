@@ -2,6 +2,8 @@
 // Created by a_mod on 29.07.2018.
 //
 
+#include <regex>
+
 #include "../header/CompilationFile.h"
 #include "../header/InstructionMap.h"
 #include "../header/error.h"
@@ -58,7 +60,14 @@ void compiler::data::CompilationFile::resolveArg(std::string arg) {
         default: {
             //TODO: Interpret numbers as floats, signed, unsigned or hex values.
             byteCode.push_back(data::InstructionMap::nameToOp.at("push"));
-            uint32_t value = static_cast<uint32_t>(std::stoi(arg));
+            uint32_t value;
+
+            if(std::regex_match(arg, std::basic_regex("0x.*")))
+                value = readHex(arg);
+            else if(std::regex_match(arg, std::basic_regex(".*\\..*")))
+                value = readFloat(arg);
+            else
+                value = readNum(arg);
 
             uint8_t a = static_cast<uint8_t>(value >> 24);
             uint8_t b = static_cast<uint8_t>(value << 8 >> 24);
@@ -90,4 +99,32 @@ void compiler::data::CompilationFile::resolveSymbolReferences() {
         byteCode.at(reference.second + 4) = d;
 
     }
+}
+
+uint32_t compiler::data::CompilationFile::readNum(std::string in) {
+    uint32_t out;
+    bool negative = false;
+    if(in[0] == '-'){
+        negative = true;
+        in.erase(in.begin());
+    }
+
+    out = static_cast<uint32_t>(std::stoi(in));
+    if(negative)
+        out |= (1 << 31);
+
+    return out;
+}
+
+uint32_t compiler::data::CompilationFile::readHex(std::string in) {
+    in.erase(in.begin());
+    in.erase(in.begin());
+    return static_cast<uint32_t>(std::stoi(in, nullptr, 16));
+}
+
+uint32_t compiler::data::CompilationFile::readFloat(std::string in) {
+    //TODO: Make work if C++ compiler isn't using IEEE 754 Representation
+    static_assert(std::numeric_limits<float>::is_iec559);
+    float f = std::stof(in);
+    return *(uint32_t*)&f;
 }
