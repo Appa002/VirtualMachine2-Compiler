@@ -18,6 +18,7 @@ namespace compiler::data {
         std::string instructionName;
         std::vector<std::string> args;
         bool hasSymbol = false;
+        bool globalSymbol = false;
         std::string symbol;
     };
 }

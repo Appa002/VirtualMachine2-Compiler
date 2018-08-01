@@ -50,8 +50,15 @@ std::vector<compiler::data::File>
 compiler::pre_processing::details::makeSymbolsUnique(std::vector<compiler::data::File> files) {
     for(uint32_t i = 0; i < files.size(); i++){
         for(auto& line : files.at(i).lines){
-            if(line.hasSymbol)
+            if(line.hasSymbol && !line.globalSymbol)
                 line.symbol = std::to_string(i) + line.symbol;
+
+            for(auto& arg : line.args){
+                if(arg[0] == '@' && arg[1] != '@'){
+                        arg.erase(arg.begin());
+                        arg = '@' + std::to_string(i) + arg;
+                }
+            }
         }
     }
     return files;

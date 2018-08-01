@@ -6,6 +6,7 @@
 #include "header/pre-processing.h"
 #include "header/compiling.h"
 #include "header/error.h"
+#include "header/ErrorFlags.h"
 
 using namespace compiler;
 
@@ -38,6 +39,7 @@ int main(int argc, char* argv[]) {
 
     outputFile.write((char*)&out.byteCode.at(0), out.byteCode.size());
     outputFile.close();
+    error::ErrorFlags::del();
     return 0;
 }
 

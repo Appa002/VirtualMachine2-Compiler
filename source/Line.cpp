@@ -17,6 +17,8 @@ compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
     if(hasSym){
         this->symbol = splitStr[0];
         this->symbol.erase(this->symbol.begin());
+        if(this->symbol[0] == '\'')
+            this->symbol.erase(this->symbol.begin());
         splitStr.erase(splitStr.begin());
     }
 
@@ -24,11 +26,6 @@ compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
     splitStr.erase(splitStr.begin());
 
     for(auto arg : splitStr){
-        if(arg[0] == '@'){
-            arg.erase(arg.begin());
-            arg = '@' + std::to_string(fileNum) + arg;
-        }
-
         this->args.push_back(arg);
     }
 

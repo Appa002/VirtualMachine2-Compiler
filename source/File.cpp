@@ -18,6 +18,8 @@ compiler::data::File::File(compiler::data::InputFile file) {
             }
             case('\''): {
                 data::Line line(it, true, file.fileLoadingNum());
+                if(it.at(1) == '\'')
+                    line.globalSymbol = true;
                 lines.push_back(line);
                 break;
             }

@@ -33,6 +33,8 @@ void compiler::data::CompilationFile::resolveArg(std::string arg) {
         case ('@'): {
             byteCode.push_back(data::InstructionMap::nameToOp.at("push"));
             arg.erase(arg.begin());
+            if(arg[0] == '@')
+                arg.erase(arg.begin());
             symbolReferences[arg] = static_cast<const uint32_t &>(byteCode.size() - 1);
             byteCode.push_back(0x00);
             byteCode.push_back(0x00);
@@ -58,7 +60,6 @@ void compiler::data::CompilationFile::resolveArg(std::string arg) {
 
 
         default: {
-            //TODO: Interpret numbers as floats, signed, unsigned or hex values.
             byteCode.push_back(data::InstructionMap::nameToOp.at("push"));
             uint32_t value;
 

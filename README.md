@@ -3,6 +3,8 @@
 A simple compiler that abstracts away some parts of writing vm2.0 bytecode directly.
 You probably want to have read the vm2.0 spec https://github.com/batburger/VirtualMachine2/blob/master/specs/specs.pdf .
 
+Beware messy code!
+
 ## Usage
 vmc [FILE]
 
@@ -19,23 +21,38 @@ Every argument is 32 bit in size.
 e.g. `jmp 0x00`
 
 ### Special lines
-If a line starts with a `'`, then it's defining a symbol. (See special arguments later). The rest of the line is
-interpreted as usual. A symbol name must be a string of ASCII characters uninterrupted
-by white-spaces or other shit like that.
+If a line starts with a `'`, then it's defining a scoped symbol. (See special arguments later). The rest of the line is
+interpreted as usual. A scoped symbol can only be resolved in the file it was defined in. A scoped symbols name must be 
+a string of ASCII characters uninterrupted by white-spaces.
 e.g. `'mySym jmp 0x00`.
 
-If a line starts with a `#`, then it's including a file. The included file is "copy-pasted" at the top of the file
-including it. All symbols used in various different files are made unique. After an include one can not put a
-instruction line.
+If a line starts with a `''`, then it's defining a global Symbol (See special arguments later). The rest of the line is 
+interpreted as usual. A global symbols name must be a string of ASCII characters uninterrupted by white-spaces. A global
+symbol can be resolved from any file.
+e.g. `''myGlobalSym jmp 0x00'`
+
+If a line starts with a `#`, then it's including a file. The included file is "copy-pasted" at the end of the file
+including it.
 e.g. `#./otherFile.txt`
 
 ### Special Args
-If a argument starts with a `@`, then it's resolving a symbol. This means that the address of the instruction where the
-symbol was defined is inserted as that argument.
+If a argument starts with a `@`, then it's resolving a scoped symbol. This means that the address of the instruction
+where the scoped symbol was defined is inserted as that argument. A scoped symbol can only be resolved in the file it 
+was defined in.
 e.g.
 ```
 'mySymbol cmp 3 4
 jmp @mySymbol
+```
+`jmp`'s argument now is the address of the `cmp`.
+
+
+If a argument starts with a `@@`, then it's resolving a global symbol. This means that the address of the instruction
+where the global symbol was defined is inserted as that argument. A global symbol can be resolved from any file.
+e.g.
+```
+''myGlobalSymbol cmp 3 4
+jmp @@myGlobalSymbol
 ```
 `jmp`'s argument now is the address of the `cmp`.
 
