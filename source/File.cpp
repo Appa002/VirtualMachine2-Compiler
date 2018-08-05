@@ -11,6 +11,13 @@ compiler::data::File::File(compiler::data::InputFile file) {
     for(auto it : file.lines()){
         if (it.size() == 0)
             continue;
+        while(true){
+            if(it[0] == ' ')
+                it.erase(it.begin());
+            else
+                break;
+        }
+
         switch (it.at(0)){
             case ('#'):{
                 break;
