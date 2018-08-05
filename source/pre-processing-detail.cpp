@@ -25,7 +25,9 @@ std::vector<compiler::data::InputFile>
 compiler::pre_processing::details::fetchIncludeFiles(compiler::data::InputFile file,
                                                      std::vector<compiler::data::InputFile> files) {
     for(std::string it : file.lines()){
-        if(it.at(0) == '#') {
+        if(it.size() == 0)
+            continue;
+        else if(it.at(0) == '#') {
             it.erase(it.begin());
             data::InputFile f(io::open$(it), it, files.size());
             files.push_back(f);

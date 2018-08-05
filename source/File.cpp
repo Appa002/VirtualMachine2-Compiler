@@ -9,6 +9,8 @@
 
 compiler::data::File::File(compiler::data::InputFile file) {
     for(auto it : file.lines()){
+        if (it.size() == 0)
+            continue;
         switch (it.at(0)){
             case ('#'):{
                 break;
