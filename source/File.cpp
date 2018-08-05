@@ -17,6 +17,8 @@ compiler::data::File::File(compiler::data::InputFile file) {
             else
                 break;
         }
+        if (it.size() == 0)
+            continue;
 
         switch (it.at(0)){
             case ('#'):{
