@@ -5,6 +5,7 @@
 #include "../header/Line.h"
 #include "../header/InputFile.h"
 #include "../header/utils.h"
+#include "../header/error.h"
 
 compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
     auto splitStr = utils::splitStr(str, ' ');
@@ -21,6 +22,9 @@ compiler::data::Line::Line(std::string str, bool hasSym, size_t fileNum) {
             this->symbol.erase(this->symbol.begin());
         splitStr.erase(splitStr.begin());
     }
+
+    if(splitStr.size() == 0 || splitStr[0] == "")
+        throw error::syntax_error("Symbol defined without instructions following it.");
 
     this->instructionName = splitStr[0];
     splitStr.erase(splitStr.begin());
