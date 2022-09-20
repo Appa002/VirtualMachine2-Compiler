@@ -7,6 +7,7 @@
 #include "../header/CompilationFile.h"
 #include "../header/InstructionMap.h"
 #include "../header/error.h"
+#include <limits>
 
 compiler::data::CompilationFile::CompilationFile(compiler::data::File file) {
     for (auto line : file.lines) {
