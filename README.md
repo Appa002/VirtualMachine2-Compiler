@@ -3,6 +3,7 @@
 A simple compiler that abstracts away some parts of writing vm2.0 bytecode directly.
 The vm2.0 spec, while incomplete, could be useful https://github.com/batburger/VirtualMachine2/blob/master/specs/specs.pdf .
 
+(This was created in 2018 / This is a hobby High School project)
 
 ## Usage
 vmc [FILE]
